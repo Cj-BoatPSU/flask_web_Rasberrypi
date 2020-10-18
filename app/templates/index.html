@@ -39,7 +39,16 @@
 	<body>
 		<div id="main">
                     <h1>Testing heatmap.js performance for improving its rendering process</h1>
-                    <p>{{content}}</p>
+					<p>{{resultset}}</p>
+					<input type="button" value="get" onclick="get_value()"/>
+					<script>
+						function get_value(){
+						var text_data = '{{resultset}}';
+						var temp_data = parseFloat(text_data);
+						console.log(temp_data);
+						}
+					</script>
+					<p>{{temp_data}}</p>
 		    <div id="heatmapArea">
 			
 		    </div>

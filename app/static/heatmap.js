@@ -235,7 +235,6 @@
             canvas.height = "15";
 
             grad = ctx.createLinearGradient(0,5,256,10);
-            //grad = ctx.createLinearGradient(0, #33ccff 0%, #ff99cc 100%);
 
             for(var i = 0; i < length; i++){
                 grad.addColorStop(1/(length-1) * i, gradArr[i].value);
@@ -271,12 +270,12 @@
                 ctx = me.get("ctx"),
                 labels = me.get("labelsEl"),
                 labelText, labelsHtml = "", offset;
-            for(var i = 0; i < 6; i++){ //gradient.length
+
+            for(var i = 0; i < gradient.length; i++){
+
                 labelText = max*gradient[i].stop >> 0;
                 offset = (ctx.measureText(labelText).width/2) >> 0;
-                // if(labelText == 0){
-                //     labelText = 21;
-                // }
+
                 if(i == 0){
                     offset = 0;
                 }
@@ -284,7 +283,7 @@
                     offset *= 2;
                 }
                 labelsHtml += '<li style="position:absolute;left:'+(((((1/(gradient.length-1)*i*256) || 0)) >> 0)-offset+.5)+'px">'+labelText+'</li>';
-            }                                                                //gradient.length-1
+            }       
             labels.innerHTML = labelsHtml;
         }
     };
@@ -341,12 +340,8 @@
                 me.set("element", (config.element instanceof Object)?config.element:document.getElementById(config.element));
                 me.set("visible", (config.visible != null)?config.visible:true);
                 me.set("max", config.max || false);
-                //me.set("gradient", config.gradient || { 0.45: "rgb(0,0,255)", 0.55: "rgb(0,255,255)", 0.65: "rgb(0,255,0)", 0.95: "yellow", 1.0: "rgb(255,0,0)"});    // default
-                me.set("gradient", config.gradient || { 0.35: "rgb(127, 205, 187)", 0.45: "rgb(65, 182, 196)", 0.75: "rgb(29, 145, 192)", 0.85: "rgb(29, 145, 192)", 0.99: "rgb(34, 94, 168)"});    //  blue 
-                //me.set("gradient", config.gradient || { 0.35: "rgb(255, 237, 160)", 0.45: "rgb(254, 217, 118)", 0.75: "rgb(254, 178, 76)", 0.85: "rgb(253, 141, 60)", 0.99: "rgb(252, 78, 42)"});   // red
-                //me.set("gradient", config.gradient || { 0.35: "rgb(199, 233, 180)", 0.55: "#a9f36a", 0.65: "#a9f36a", 0.85: "#78ec6c", 0.99: "#57e86b"});    // green
-
-                me.set("opacity", parseInt(255/(100/config.opacity), 10) || 180);                           
+                me.set("gradient", config.gradient || { 0.55: "rgb(0,0,255)", 0.65: "rgb(0,255,255)", 0.75: "rgb(0,255,0)", 0.85: "yellow", 0.95: "rgb(255,0,0)"});    // default is the common blue to red gradient
+                me.set("opacity", parseInt(255/(100/config.opacity), 10) || 180);
                 me.set("width", config.width || 0);
                 me.set("height", config.height || 0);
                 me.set("debug", config.debug);
@@ -414,7 +409,7 @@
             canvas.width = "1";
             canvas.height = "256";
             ctx = canvas.getContext("2d");
-            grad = ctx.createLinearGradient(64,0,1,256);
+            grad = ctx.createLinearGradient(0,0,1,256);
 
             // Test how the browser renders alpha by setting a partially transparent pixel
             // and reading the result.  A good browser will return a value reasonably close
@@ -558,8 +553,8 @@
                     ctx = me.get("actx"),
                     max = me.get("max"),
                     bounds = me.get("bounds"),
-                    xb = x - (1.5 * radius) >> 0, yb = y - (1.5 * radius) >> 0,
-                    xc = x + (1.5 * radius) >> 0, yc = y + (1.5 * radius) >> 0;
+                    xb = x - (5.5 * radius) >> 0, yb = y - (5.5 * radius) >> 0,
+                    xc = x + (5.5 * radius) >> 0, yc = y + (5.5 * radius) >> 0;
 
                 ctx.shadowColor = ('rgba(0,0,0,'+((count)?(count/me.store.max):'0.1')+')');
 
