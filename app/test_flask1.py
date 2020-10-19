@@ -3,7 +3,16 @@ import json
 from flask import Flask, render_template, request, redirect, Response
 
 app = Flask(__name__)
+from configparser import ConfigParser
 
+config_object = ConfigParser()
+config_object.read("config.ini")
+influxDB_config = config_object["INFLUXDB"]
+INFLUXDB_ADDRESS = influxDB_config["influxdb_address"].encode('utf-8')
+INFLUXDB_USER = influxDB_config["influxdb_user"].encode('utf-8')
+INFLUXDB_PASSWORD = influxDB_config["influxdb_password"].encode('utf-8')
+INFLUXDB_DATABASE = influxDB_config["influxdb_database"].encode('utf-8')
+INFLUXDB_PORT = int(influxDB_config["influxdb_port"])
 
 @app.route('/')
 def hello():
@@ -26,16 +35,14 @@ def output():
 
 def query_data():
     """Instantiate a connection to the InfluxDB."""
-    host = 'localhost'
-    port = 8086
-    user = 'mydb'
-    password = 'cjboat'
-    dbname = 'db_version2'
+    host = INFLUXDB_ADDRESS
+    port = INFLUXDB_PORT
+    user = INFLUXDB_USER
+    password = INFLUXDB_PASSWORD
+    dbname = INFLUXDB_DATABASE
     query_sensor1 = 'SELECT * FROM "temperature" WHERE "location"=\'sensor1\' ORDER BY time DESC limit 1;'
     query_sensor2 = 'SELECT * FROM "temperature" WHERE "location"=\'sensor2\' ORDER BY time DESC limit 1;'
     client = InfluxDBClient(host, port, user, password, dbname)
-
-    # print("Querying data: " + query)
     result_sensor1 = client.query(query_sensor1)
     result_sensor2 = client.query(query_sensor2)
     # for point in result.get_points():
