@@ -15,14 +15,13 @@ def hello_name(name):
 
 @app.route('/test')
 def output():
-    content2=query_data()
-    # content1=json.dumps(query_data())
-    #print(content2.get('statement_id'))
-    print(content2['series'][0]['values'][0][2]) 
-    # data = content1[content1.index('sensor1", ') + len('sensor1", '):]
-    # dat = data[0:6]
-    # serve index template
-    return render_template('index.html', resultset = content2['series'][0]['values'][0][2])
+    tuple_data=query_data()
+    data_sensor1 = tuple_data[0]['series'][0]['values'][0][2]
+    data_sensor2 = tuple_data[1]['series'][0]['values'][0][2]
+    print(tuple_data[0]['series'][0]['values'][0][2])
+    print(tuple_data[1]['series'][0]['values'][0][2]) 
+    #resultset_sensor1 = data1['series'][0]['values'][0][2]
+    return render_template('index.html', temp_sensor1 = data_sensor1, temp_sensor2 = data_sensor2)
 
 
 def query_data():
@@ -32,18 +31,18 @@ def query_data():
     user = 'mydb'
     password = 'cjboat'
     dbname = 'db_version2'
-    query = 'SELECT * FROM "temperature" WHERE "location"=\'sensor1\' ORDER BY time DESC limit 1;'
-
+    query_sensor1 = 'SELECT * FROM "temperature" WHERE "location"=\'sensor1\' ORDER BY time DESC limit 1;'
+    query_sensor2 = 'SELECT * FROM "temperature" WHERE "location"=\'sensor2\' ORDER BY time DESC limit 1;'
     client = InfluxDBClient(host, port, user, password, dbname)
 
     # print("Querying data: " + query)
-    result = client.query(query)
-    
+    result_sensor1 = client.query(query_sensor1)
+    result_sensor2 = client.query(query_sensor2)
     # for point in result.get_points():
        # print(point)
     
    # print(result)
-    return result.raw
+    return result_sensor1.raw,result_sensor2.raw
 
 if __name__ == '__main__':
     app.run(debug=True)

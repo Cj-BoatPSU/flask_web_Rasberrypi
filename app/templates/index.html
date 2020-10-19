@@ -39,36 +39,49 @@
 	<body>
 		<div id="main">
                     <h1>Testing heatmap.js performance for improving its rendering process</h1>
-					<p>{{resultset}}</p>
+					<p>senor1 : {{temp_sensor1}}</p>
+					<p>sensor2 : {{temp_sensor2}}</p>
 					<input type="button" value="get" onclick="get_value()"/>
 					<script>
 						function get_value(){
-						var text_data = '{{resultset}}';
-						var temp_data = parseFloat(text_data);
-						console.log(temp_data);
+						var text_sensor1 = '{{temp_sensor1}}';
+						var text_sensor2 = '{{temp_sensor2}}';
+						var temp_1 = parseFloat(text_sensor1);
+						var temp_2 = parseFloat(text_sensor2);
+						console.log(temp_1);
+						console.log(temp_2);
 						}
 					</script>
-					<p>{{temp_data}}</p>
+				
 		    <div id="heatmapArea">
 			
 		    </div>
                     <div id="result"></div>
 		</div>
-		<script type="text/javascript" src="../static/heatmap.js"></script>
+		<script type="text/javascript" src="../static/heatmapV3.js"></script>
                 <script type="text/javascript" src="../static/data.js"></script>
 		<script type="text/javascript">
 	
 	
 		window.onload = function(){
-                    
-                    var data = window.data["10dp"],
+					var text_sensor1 = '{{temp_sensor1}}';
+					var text_sensor2 = '{{temp_sensor2}}';
+					var temp_1 = parseFloat(text_sensor1);
+					var temp_2 = parseFloat(text_sensor2);
+                    var data = {
+        		"max":30, "data":[
+            						//leck1 sensor1
+							{"x":250,"y":90,"count":temp_1},//{"x":270,"y":90,"count":temp_1},
+									//leck1 sensor2
+							{"x":250,"y":260,"count":temp_2},
+						]},
                         start = +new Date,
                         heatmapInstance;
                         
                     heatmapInstance = h337.create({
 						"element":document.getElementById("heatmapArea"), 
-						"opacity": 0.3,
-                        "radius":25,
+						"opacity": 0.1,
+                        "radius":40,
 						"visible":true,
 						"maxOpacity": 1,
   						"minOpacity": 0,

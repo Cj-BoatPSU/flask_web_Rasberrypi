@@ -2,7 +2,7 @@
     var data = {};
 
     data["10dp"] = {
-        "max":1, "data":[
+        "max":30, "data":[
             //leck 1 
             {"x":250,"y":5,"count":1}, //middle
             

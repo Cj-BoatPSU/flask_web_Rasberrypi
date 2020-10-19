@@ -563,7 +563,7 @@
                 ctx.shadowBlur = 15; 
 
                 ctx.beginPath();
-                ctx.arc(x - 15000, y - 15000, radius, 0, Math.PI * 2, true);
+                ctx.arc(x - 15000, y - 15000, radius, 0, Math.PI * 5, true);
                 ctx.closePath();
                 ctx.fill();
                 if(colorize){
