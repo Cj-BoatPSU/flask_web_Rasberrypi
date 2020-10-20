@@ -14,7 +14,7 @@ INFLUXDB_PASSWORD = influxDB_config["influxdb_password"].encode('utf-8')
 INFLUXDB_DATABASE = influxDB_config["influxdb_database"].encode('utf-8')
 INFLUXDB_PORT = int(influxDB_config["influxdb_port"])
 
-@app.route('/')
+@app.route('/test')
 def hello():
     return "Hello World!"
 
@@ -22,7 +22,7 @@ def hello():
 def hello_name(name):
     return render_template('index.html', content = name)
 
-@app.route('/test')
+@app.route('/')
 def output():
     tuple_data=query_data()
     data_sensor1 = tuple_data[0]['series'][0]['values'][0][2]

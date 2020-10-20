@@ -242,6 +242,7 @@
 
             ctx.fillStyle = grad;
             ctx.fillRect(0,5,256,10);
+            //ctx.fillRect(75,0,75,75);
             ctx.strokeStyle = "black";
             ctx.beginPath();
  
@@ -426,6 +427,7 @@
             }
 
             ctx.fillStyle = grad;
+            // ctx.fillRect(0,0,1,256);
             ctx.fillRect(0,0,1,256);
 
             me.set("gradient", ctx.getImageData(0,0,1,256).data);
@@ -563,7 +565,8 @@
                 ctx.shadowBlur = 15; 
 
                 ctx.beginPath();
-                ctx.arc(x - 15000, y - 15000, radius, 0, Math.PI * 5, true);
+                ctx.arc(x - 15000, y - 15000, radius, 0, Math.PI * 2, true);
+                // ctx.arc(x - 20000, y - 20000, radius, 0, Math.PI * 2, true);
                 ctx.closePath();
                 ctx.fill();
                 if(colorize){
