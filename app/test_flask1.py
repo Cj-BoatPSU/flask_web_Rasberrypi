@@ -45,10 +45,7 @@ def query_data():
     client = InfluxDBClient(host, port, user, password, dbname)
     result_sensor1 = client.query(query_sensor1)
     result_sensor2 = client.query(query_sensor2)
-    # for point in result.get_points():
-       # print(point)
-    
-   # print(result)
+
     return result_sensor1.raw,result_sensor2.raw
 
 if __name__ == '__main__':
