@@ -29,7 +29,6 @@ def output():
     data_sensor2 = tuple_data[1]['series'][0]['values'][0][2]
     print(tuple_data[0]['series'][0]['values'][0][2])
     print(tuple_data[1]['series'][0]['values'][0][2]) 
-    #resultset_sensor1 = data1['series'][0]['values'][0][2]
     return render_template('index.html', temp_sensor1 = data_sensor1, temp_sensor2 = data_sensor2)
 
 
